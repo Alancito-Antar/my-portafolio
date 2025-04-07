@@ -5,4 +5,7 @@ export interface Project {
   type: "contractor" | "freelance";
   icon_url?: string;
   tech_stack: [];
+  images: [];
+  google_play_url?: string;
+  appstore_url?: string;
 }

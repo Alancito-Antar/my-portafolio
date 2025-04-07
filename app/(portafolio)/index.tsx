@@ -53,8 +53,8 @@ export default function ProjectsScreen() {
       {loading && <ActivityIndicator />}
 
       <FlatList
-        contentContainerStyle={tw`px-4 pb-[${insets.bottom || 16}px] gap-y-2`}
-        columnWrapperStyle={tw`gap-x-2`}
+        contentContainerStyle={tw`px-4 pb-[${insets.bottom || 16}px] gap-y-4`}
+        columnWrapperStyle={tw`gap-x-4`}
         showsHorizontalScrollIndicator={false}
         decelerationRate="fast"
         numColumns={2}

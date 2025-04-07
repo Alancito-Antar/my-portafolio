@@ -1,10 +1,13 @@
+import ProjectImages from "@/components/portafolio/project/ProjectImages";
+import ProjectHeader from "@/components/portafolio/project/ProjectHeader";
+import ProjectNameAndStack from "@/components/portafolio/project/ProjectHeader";
 import { db } from "@/firebaseConfig";
 import { Project } from "@/lib/projects/types";
 import tw from "@/tailwind";
 import { useLocalSearchParams } from "expo-router/build/hooks";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { View, Text, Image, ActivityIndicator } from "react-native";
+import { View, Text, Image, ActivityIndicator, FlatList } from "react-native";
 
 export default function ProjectScreen() {
   const { projectId } = useLocalSearchParams();
@@ -48,35 +51,13 @@ export default function ProjectScreen() {
   }
 
   return (
-    <View style={tw`flex-1 gap-y-4 p-4 bg-black`}>
-      <View style={tw`flex-row items-center gap-x-4 `}>
-        <Image
-          style={tw`h-20 w-20 rounded-full`}
-          source={{
-            uri:
-              project?.icon_url ||
-              "https://dynamoprojects.com/wp-content/uploads/2022/12/no-image.jpg",
-          }}
-        />
-
-        <View style={tw`gap-y-1`}>
-          <Text style={tw`text-white text-3xl`}>{project?.name}</Text>
-          <View style={tw`flex-row items-center flex-wrap gap-x-2`}>
-            {project?.tech_stack?.map((x) => (
-              <View
-                style={tw`px-2 py-1 rounded-full items-center bg-white/10`}
-                key={x}
-              >
-                <Text style={tw`text-white text-sm`}>{x}</Text>
-              </View>
-            ))}
-          </View>
-        </View>
-      </View>
-
-      <View style={tw`gap-y-1`}>
-        <Text style={tw`text-white`}>{project?.about}</Text>
-      </View>
+    <View style={tw`flex-1 gap-y-4 w-full p-4 bg-black`}>
+      {/* Header */}
+      <ProjectHeader project={project} />
+      {/* About */}
+      <Text style={tw`text-white`}>{project.about}</Text>
+      {/* Images */}
+      <ProjectImages images={project.images || []} />
     </View>
   );
 }
